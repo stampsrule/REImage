@@ -16,8 +16,6 @@
 		6FB77C9F1AD315060061787F /* REImageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB77C9E1AD315060061787F /* REImageTests.m */; };
 		6FB77CAD1AD351E70061787F /* AHouseDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB77CAC1AD351E70061787F /* AHouseDisplayViewController.m */; };
 		6FB77CB01AD356BF0061787F /* AHousePicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB77CAF1AD356BF0061787F /* AHousePicture.m */; };
-		6FB77CB31AD38F270061787F /* housePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB77CB21AD38F270061787F /* housePhoto.m */; };
-		6FB77CB61AD393A80061787F /* realtor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB77CB51AD393A80061787F /* realtor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,10 +45,6 @@
 		6FB77CAC1AD351E70061787F /* AHouseDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHouseDisplayViewController.m; sourceTree = "<group>"; };
 		6FB77CAE1AD356BF0061787F /* AHousePicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHousePicture.h; sourceTree = "<group>"; };
 		6FB77CAF1AD356BF0061787F /* AHousePicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHousePicture.m; sourceTree = "<group>"; };
-		6FB77CB11AD38F270061787F /* housePhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = housePhoto.h; sourceTree = "<group>"; };
-		6FB77CB21AD38F270061787F /* housePhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = housePhoto.m; sourceTree = "<group>"; };
-		6FB77CB41AD393A70061787F /* realtor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = realtor.h; sourceTree = "<group>"; };
-		6FB77CB51AD393A80061787F /* realtor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = realtor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,10 +90,6 @@
 				6FB77C841AD315050061787F /* AppDelegate.m */,
 				6FB77CAB1AD351E70061787F /* AHouseDisplayViewController.h */,
 				6FB77CAC1AD351E70061787F /* AHouseDisplayViewController.m */,
-				6FB77CB11AD38F270061787F /* housePhoto.h */,
-				6FB77CB21AD38F270061787F /* housePhoto.m */,
-				6FB77CB41AD393A70061787F /* realtor.h */,
-				6FB77CB51AD393A80061787F /* realtor.m */,
 				6FB77CAE1AD356BF0061787F /* AHousePicture.h */,
 				6FB77CAF1AD356BF0061787F /* AHousePicture.m */,
 				6FB77C8C1AD315060061787F /* Main.storyboard */,
@@ -238,8 +228,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FB77C881AD315050061787F /* REImage.xcdatamodeld in Sources */,
-				6FB77CB61AD393A80061787F /* realtor.m in Sources */,
-				6FB77CB31AD38F270061787F /* housePhoto.m in Sources */,
 				6FB77CB01AD356BF0061787F /* AHousePicture.m in Sources */,
 				6FB77C851AD315050061787F /* AppDelegate.m in Sources */,
 				6FB77CAD1AD351E70061787F /* AHouseDisplayViewController.m in Sources */,
@@ -436,6 +424,7 @@
 				6FB77CA41AD315060061787F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6FB77CA51AD315060061787F /* Build configuration list for PBXNativeTarget "REImageTests" */ = {
 			isa = XCConfigurationList;
@@ -444,6 +433,7 @@
 				6FB77CA71AD315060061787F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

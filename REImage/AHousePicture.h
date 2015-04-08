@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface AHousePicture : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;

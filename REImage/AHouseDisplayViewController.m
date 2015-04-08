@@ -8,31 +8,29 @@
 
 #import "AHouseDisplayViewController.h"
 #import "AHousePicture.h"
-#import "housePhoto.h"
-#import "realtor.h"
 
 @implementation AHouseDisplayViewController
 
 @synthesize responseData;
-
+@synthesize navigationItem;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     NSUInteger houseID = arc4random_uniform(505001) + 15000000;
+    [self getDataFrom:[NSString stringWithFormat:@"%lu", houseID]];
     
-    NSString *aHousePage = [NSString stringWithFormat:@"http://www.realtor.ca/propertyDetails.aspx?PropertyId=%lu", (unsigned long)houseID];
-    NSLog(@"the url: %@", aHousePage);
-    [self getDataFrom:aHousePage];
-    
-    self.houses = [@[] mutableCopy];
-    self.pictureResults = [@{} mutableCopy];
-    self.Realtor = [[realtor alloc] init];
+//    self.houses = [@[] mutableCopy];
+//    self.pictureResults = [@{} mutableCopy];
     self.houseImages = [[NSMutableArray alloc] init];
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"AHousePicture"];
 }
 
-- (void) getDataFrom:(NSString *)url{
+
+
+- (void) getDataFrom:(NSString *)houseID{
+    NSString *url = [NSString stringWithFormat:@"http://www.realtor.ca/propertyDetails.aspx?PropertyId=%@", houseID];
+    NSLog(@"the url: %@", url);
+
     responseData = [NSMutableData new];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     [request setHTTPMethod:@"GET"];
@@ -56,26 +54,35 @@
     NSError *error = nil;
     NSString* responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     NSLog(@"the html was %@", responseString);
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(href='http://cdn.realtor.ca/listing/reb.*/highres)(.*)('>)" options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(href='http://cdn.realtor.ca/listing/reb)(.*/highres.*)('>)" options:NSRegularExpressionCaseInsensitive error:&error];
     
     NSArray *matches = [regex matchesInString:responseString options:0 range:NSMakeRange(0, responseString.length)];
     
     NSLog(@"results: %@", matches);
     
-    int count =0;
-    
-    for (NSTextCheckingResult *entry in matches)
-    {
-        NSRange matchRange = [entry rangeAtIndex:2];
-        NSString *matchString = [responseString substringWithRange:matchRange];
-        NSLog(@"Result1 %d: - %@", count++, matchString);
+    if (matches.count == 0) {
+        NSLog(@"returned no images");
+        NSUInteger houseID = arc4random_uniform(505001) + 15000000;
+        [self getDataFrom:[NSString stringWithFormat:@"%lu", houseID]];
+
+
+    } else if (matches.count>0){
+        int count =0;
         
-        [self.houseImages addObject:[NSString stringWithFormat:@"http://cdn.realtor.ca/listing/reb9/highres%@",matchString]];
-        NSLog(@"size: %lu", (unsigned long)self.houseImages.count);
+        for (NSTextCheckingResult *entry in matches)
+        {
+            NSRange matchRange = [entry rangeAtIndex:2];
+            NSString *matchString = [responseString substringWithRange:matchRange];
+            NSLog(@"Result1 %d: - %@", count++, matchString);
+            
+            [self.houseImages addObject:[NSString stringWithFormat:@"http://cdn.realtor.ca/listing/reb%@",matchString]];
+            NSLog(@"size: %lu", (unsigned long)self.houseImages.count);
+            
+        }
         
+        [self.collectionView reloadData];
+        //http://cdn.realtor.ca/listing/reb9/highres/7/c3623407_2.jpg '><img id
     }
-    [self.collectionView reloadData];
-    //http://cdn.realtor.ca/listing/reb9/highres/7/c3623407_2.jpg '><img id
 }
 
 - (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
@@ -95,11 +102,9 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AHousePicture *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AHousePicture" forIndexPath:indexPath];
-    //cell.imageView.image = [UIImage imageNamed:self.truckImages[0]];
     UIImage *houseImage = [[UIImage alloc] init];
-    //houseImage = [UIImage imageNamed:[self.houseImages objectAtIndex:indexPath.row]];
-    //cell.imageView.image = houseImage;
-    cell.backgroundColor = [UIColor whiteColor];
+    houseImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[self.houseImages objectAtIndex:indexPath.row]]]];
+    cell.imageView.image = houseImage;
     return cell;
 }
 
@@ -111,20 +116,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: Deselect item
 }
-#pragma mark – UICollectionViewDelegateFlowLayout
+- (IBAction)reloadScreen:(UIBarButtonItem *)sender {
+    [self.houseImages removeAllObjects];
+    NSUInteger houseID = arc4random_uniform(505001) + 15000000;
+    [self getDataFrom:[NSString stringWithFormat:@"%lu", houseID]];
 
-// 1
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    NSString *searchTerm = self.searches[indexPath.section]; FlickrPhoto *photo =
-//    self.searchResults[searchTerm][indexPath.row];
-//    // 2
-//    CGSize retval = photo.thumbnail.size.width > 0 ? photo.thumbnail.size : CGSizeMake(100, 100);
-//    retval.height += 35; retval.width += 35; return retval;
-//}
-//
-//// 3
-//- (UIEdgeInsets)collectionView:
-//(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-//    return UIEdgeInsetsMake(50, 20, 50, 20);
-//}
+}
 @end

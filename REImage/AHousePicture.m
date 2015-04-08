@@ -7,7 +7,6 @@
 //
 
 #import "AHousePicture.h"
-
 @implementation AHousePicture
 
 @end

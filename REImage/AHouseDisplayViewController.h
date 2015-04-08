@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "realtor.h"
 
 @interface AHouseDisplayViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property(nonatomic, strong) NSMutableDictionary *pictureResults;
-@property(nonatomic, strong) NSMutableArray *houses;
-@property(nonatomic, strong) realtor *Realtor;
+//@property(nonatomic, strong) NSMutableDictionary *pictureResults;
+//@property(nonatomic, strong) NSMutableArray *houses;
 
 
 @property (nonatomic, retain) NSMutableData* responseData;
@@ -21,5 +19,7 @@
 @property(nonatomic, weak) IBOutlet UILabel *houseAddress;
 @property (weak, nonatomic) IBOutlet UINavigationItem *houseInforNaviagationItem;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionsView;
+@property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
+- (IBAction)reloadScreen:(UIBarButtonItem *)sender;
 
 @end
