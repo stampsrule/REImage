@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HousePhotoViewController.h"
 
-@interface AHouseDisplayViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface AHouseDisplayViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, HousePhotoViewControllerDelegate>{
+    NSUInteger houseID;
+}
 
 //@property(nonatomic, strong) NSMutableDictionary *pictureResults;
 //@property(nonatomic, strong) NSMutableArray *houses;
 
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *ratingButtons;
 @property (nonatomic, retain) NSMutableData* responseData;
 @property (strong, nonatomic) NSMutableArray *houseImages;
 @property(nonatomic, weak) IBOutlet UILabel *houseAddress;
@@ -21,5 +25,6 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionsView;
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
 - (IBAction)reloadScreen:(UIBarButtonItem *)sender;
+- (IBAction)ratingButtons:(UISegmentedControl *)sender;
 
 @end

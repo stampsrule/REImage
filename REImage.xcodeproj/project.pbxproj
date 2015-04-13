@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F3007431AD71FE500BE0253 /* HouseDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3007421AD71FE500BE0253 /* HouseDataController.m */; };
+		6F6D97131AD5FCE9002D6DB6 /* HousePhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6D97121AD5FCE9002D6DB6 /* HousePhotoViewController.m */; };
+		6F96B02A1ADBFD6C00E8BADA /* SharedPreferenceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F96B0291ADBFD6C00E8BADA /* SharedPreferenceTableViewController.m */; };
+		6F96B02D1ADC08BE00E8BADA /* SharedPrefCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F96B02C1ADC08BE00E8BADA /* SharedPrefCell.m */; };
+		6F96B0301ADC0D0800E8BADA /* Picture.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F96B02F1ADC0D0800E8BADA /* Picture.m */; };
+		6F96B0331ADC0D0800E8BADA /* House.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F96B0321ADC0D0800E8BADA /* House.m */; };
+		6F96B0361ADC0D0800E8BADA /* Partners_Ratings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F96B0351ADC0D0800E8BADA /* Partners_Ratings.m */; };
+		6F96B0391ADC0D0800E8BADA /* Rating.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F96B0381ADC0D0800E8BADA /* Rating.m */; };
+		6F96B03C1ADC0D0900E8BADA /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F96B03B1ADC0D0900E8BADA /* Comment.m */; };
+		6FA8C4D11ADC4ADB000E38FE /* UserFavsTableTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8C4D01ADC4ADB000E38FE /* UserFavsTableTableViewController.m */; };
 		6FB77C821AD315050061787F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB77C811AD315050061787F /* main.m */; };
 		6FB77C851AD315050061787F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB77C841AD315050061787F /* AppDelegate.m */; };
 		6FB77C881AD315050061787F /* REImage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6FB77C861AD315050061787F /* REImage.xcdatamodeld */; };
@@ -29,6 +39,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F3007411AD71FE500BE0253 /* HouseDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseDataController.h; sourceTree = "<group>"; };
+		6F3007421AD71FE500BE0253 /* HouseDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseDataController.m; sourceTree = "<group>"; };
+		6F6D97111AD5FCE9002D6DB6 /* HousePhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HousePhotoViewController.h; sourceTree = "<group>"; };
+		6F6D97121AD5FCE9002D6DB6 /* HousePhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HousePhotoViewController.m; sourceTree = "<group>"; };
+		6F96B0281ADBFD6C00E8BADA /* SharedPreferenceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedPreferenceTableViewController.h; sourceTree = "<group>"; };
+		6F96B0291ADBFD6C00E8BADA /* SharedPreferenceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedPreferenceTableViewController.m; sourceTree = "<group>"; };
+		6F96B02B1ADC08BE00E8BADA /* SharedPrefCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedPrefCell.h; sourceTree = "<group>"; };
+		6F96B02C1ADC08BE00E8BADA /* SharedPrefCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedPrefCell.m; sourceTree = "<group>"; };
+		6F96B02E1ADC0D0800E8BADA /* Picture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Picture.h; sourceTree = "<group>"; };
+		6F96B02F1ADC0D0800E8BADA /* Picture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Picture.m; sourceTree = "<group>"; };
+		6F96B0311ADC0D0800E8BADA /* House.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = House.h; sourceTree = "<group>"; };
+		6F96B0321ADC0D0800E8BADA /* House.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = House.m; sourceTree = "<group>"; };
+		6F96B0341ADC0D0800E8BADA /* Partners_Ratings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Partners_Ratings.h; sourceTree = "<group>"; };
+		6F96B0351ADC0D0800E8BADA /* Partners_Ratings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Partners_Ratings.m; sourceTree = "<group>"; };
+		6F96B0371ADC0D0800E8BADA /* Rating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rating.h; sourceTree = "<group>"; };
+		6F96B0381ADC0D0800E8BADA /* Rating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rating.m; sourceTree = "<group>"; };
+		6F96B03A1ADC0D0900E8BADA /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		6F96B03B1ADC0D0900E8BADA /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		6FA8C4CF1ADC4ADB000E38FE /* UserFavsTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserFavsTableTableViewController.h; sourceTree = "<group>"; };
+		6FA8C4D01ADC4ADB000E38FE /* UserFavsTableTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserFavsTableTableViewController.m; sourceTree = "<group>"; };
 		6FB77C7C1AD315050061787F /* REImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = REImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FB77C801AD315050061787F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6FB77C811AD315050061787F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -90,12 +120,32 @@
 				6FB77C841AD315050061787F /* AppDelegate.m */,
 				6FB77CAB1AD351E70061787F /* AHouseDisplayViewController.h */,
 				6FB77CAC1AD351E70061787F /* AHouseDisplayViewController.m */,
+				6F6D97111AD5FCE9002D6DB6 /* HousePhotoViewController.h */,
+				6F6D97121AD5FCE9002D6DB6 /* HousePhotoViewController.m */,
+				6F96B0281ADBFD6C00E8BADA /* SharedPreferenceTableViewController.h */,
+				6F96B0291ADBFD6C00E8BADA /* SharedPreferenceTableViewController.m */,
+				6FA8C4CF1ADC4ADB000E38FE /* UserFavsTableTableViewController.h */,
+				6FA8C4D01ADC4ADB000E38FE /* UserFavsTableTableViewController.m */,
+				6F96B02B1ADC08BE00E8BADA /* SharedPrefCell.h */,
+				6F96B02C1ADC08BE00E8BADA /* SharedPrefCell.m */,
 				6FB77CAE1AD356BF0061787F /* AHousePicture.h */,
 				6FB77CAF1AD356BF0061787F /* AHousePicture.m */,
 				6FB77C8C1AD315060061787F /* Main.storyboard */,
 				6FB77C8F1AD315060061787F /* Images.xcassets */,
 				6FB77C911AD315060061787F /* LaunchScreen.xib */,
 				6FB77C861AD315050061787F /* REImage.xcdatamodeld */,
+				6F96B03A1ADC0D0900E8BADA /* Comment.h */,
+				6F96B03B1ADC0D0900E8BADA /* Comment.m */,
+				6F96B0371ADC0D0800E8BADA /* Rating.h */,
+				6F96B0381ADC0D0800E8BADA /* Rating.m */,
+				6F96B0341ADC0D0800E8BADA /* Partners_Ratings.h */,
+				6F96B0351ADC0D0800E8BADA /* Partners_Ratings.m */,
+				6F96B0311ADC0D0800E8BADA /* House.h */,
+				6F96B0321ADC0D0800E8BADA /* House.m */,
+				6F96B02E1ADC0D0800E8BADA /* Picture.h */,
+				6F96B02F1ADC0D0800E8BADA /* Picture.m */,
+				6F3007411AD71FE500BE0253 /* HouseDataController.h */,
+				6F3007421AD71FE500BE0253 /* HouseDataController.m */,
 				6FB77C7F1AD315050061787F /* Supporting Files */,
 			);
 			path = REImage;
@@ -227,9 +277,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F6D97131AD5FCE9002D6DB6 /* HousePhotoViewController.m in Sources */,
+				6FA8C4D11ADC4ADB000E38FE /* UserFavsTableTableViewController.m in Sources */,
+				6F3007431AD71FE500BE0253 /* HouseDataController.m in Sources */,
 				6FB77C881AD315050061787F /* REImage.xcdatamodeld in Sources */,
+				6F96B0391ADC0D0800E8BADA /* Rating.m in Sources */,
 				6FB77CB01AD356BF0061787F /* AHousePicture.m in Sources */,
 				6FB77C851AD315050061787F /* AppDelegate.m in Sources */,
+				6F96B02D1ADC08BE00E8BADA /* SharedPrefCell.m in Sources */,
+				6F96B03C1ADC0D0900E8BADA /* Comment.m in Sources */,
+				6F96B0301ADC0D0800E8BADA /* Picture.m in Sources */,
+				6F96B0361ADC0D0800E8BADA /* Partners_Ratings.m in Sources */,
+				6F96B02A1ADBFD6C00E8BADA /* SharedPreferenceTableViewController.m in Sources */,
+				6F96B0331ADC0D0800E8BADA /* House.m in Sources */,
 				6FB77CAD1AD351E70061787F /* AHouseDisplayViewController.m in Sources */,
 				6FB77C821AD315050061787F /* main.m in Sources */,
 			);

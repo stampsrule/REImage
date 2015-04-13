@@ -8,27 +8,32 @@
 
 #import "AHouseDisplayViewController.h"
 #import "AHousePicture.h"
+#import "HousePhotoViewController.h"
+#import "HouseDataController.h"
+#import "AppDelegate.h"
+
 
 @implementation AHouseDisplayViewController
 
 @synthesize responseData;
 @synthesize navigationItem;
+@synthesize ratingButtons;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSUInteger houseID = arc4random_uniform(505001) + 15000000;
-    [self getDataFrom:[NSString stringWithFormat:@"%lu", houseID]];
+    houseID = arc4random_uniform(505001) + 15000000;
+    self.houseImages = [[NSMutableArray alloc] init];
+    [self getData];
     
 //    self.houses = [@[] mutableCopy];
 //    self.pictureResults = [@{} mutableCopy];
-    self.houseImages = [[NSMutableArray alloc] init];
 }
 
 
 
-- (void) getDataFrom:(NSString *)houseID{
-    NSString *url = [NSString stringWithFormat:@"http://www.realtor.ca/propertyDetails.aspx?PropertyId=%@", houseID];
+- (void) getData{
+    NSString *url = [NSString stringWithFormat:@"http://www.realtor.ca/propertyDetails.aspx?PropertyId=%lu", (unsigned long)houseID];
     NSLog(@"the url: %@", url);
 
     responseData = [NSMutableData new];
@@ -53,17 +58,17 @@
 - (void) connectionDidFinishLoading:(NSURLConnection *)connection {
     NSError *error = nil;
     NSString* responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-    NSLog(@"the html was %@", responseString);
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(href='http://cdn.realtor.ca/listing/reb)(.*/highres.*)('>)" options:NSRegularExpressionCaseInsensitive error:&error];
     
     NSArray *matches = [regex matchesInString:responseString options:0 range:NSMakeRange(0, responseString.length)];
     
-    NSLog(@"results: %@", matches);
+    
+    NSRegularExpression *regex2 = [NSRegularExpression regularExpressionWithPattern:@"(id=\"m_property_dtl_address\">)(.*)( &nbsp; .*</span>)" options:NSRegularExpressionCaseInsensitive error:&error];
     
     if (matches.count == 0) {
         NSLog(@"returned no images");
-        NSUInteger houseID = arc4random_uniform(505001) + 15000000;
-        [self getDataFrom:[NSString stringWithFormat:@"%lu", houseID]];
+        houseID = arc4random_uniform(505001) + 15000000;
+        [self getData];
 
 
     } else if (matches.count>0){
@@ -79,9 +84,54 @@
             NSLog(@"size: %lu", (unsigned long)self.houseImages.count);
             
         }
+
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+
+        for (int i =0; i == self.houseImages.count; i++) {
+
+            NSManagedObject *newPicture;
+            newPicture = [NSEntityDescription
+                                insertNewObjectForEntityForName:@"Picture"
+                                inManagedObjectContext:context];
+            [newPicture setValue: [NSNumber numberWithInteger:houseID] forKey:@"houseID"];
+            [newPicture setValue: self.houseImages[i] forKey:@"location"];
+            NSError *error2;
+            if (![context save:&error2]) {
+                NSLog(@"Whoops, couldn't save: %@", [error2 localizedDescription]);
+            } else {
+                NSLog(@"Partner Rating saved");
+            }
+        }
+        
+        NSFetchRequest *fetchRequest3 = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity3 = [NSEntityDescription
+                                        entityForName:@"Picture" inManagedObjectContext:context];
+        [fetchRequest3 setEntity:entity3];
+        NSError *error3;
+        NSArray *myPictures = [context executeFetchRequest:fetchRequest3 error:&error3];
+        
+        for (NSManagedObject *info in myPictures) {
+            NSLog(@"House: %@ picture: %@", [info valueForKey:@"houseID"], [info valueForKey:@"location"]);
+        }
+        
+        count =0;
+
+        NSTextCheckingResult *match = [regex2 firstMatchInString:responseString
+                                                        options:0
+                                                          range:NSMakeRange(0, [responseString length])];
+        if (match) {
+            NSRange secondHalfRange = [match rangeAtIndex:2];
+            NSString *secondMatchString = [responseString substringWithRange:secondHalfRange];
+            self.navigationItem.title = secondMatchString;
+        }
+        
+        
+        
         
         [self.collectionView reloadData];
-        //http://cdn.realtor.ca/listing/reb9/highres/7/c3623407_2.jpg '><img id
+        ratingButtons.hidden = NO;
+
     }
 }
 
@@ -111,15 +161,80 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: Select Item
+    [self performSegueWithIdentifier:@"ShowPicture" sender:self];
+    //deletes the image
+//    long row = [indexPath row];
+//    [self.houseImages removeObjectAtIndex:row];
+//    NSArray *deletions = @[indexPath];
+//    [self.collectionView deleteItemsAtIndexPaths:deletions];
 }
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: Deselect item
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowPicture"]) {
+        
+        NSIndexPath *selectedIndexPath = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
+        UINavigationController *navigationController = segue.destinationViewController;
+        HousePhotoViewController *housePhotoViewController = [navigationController viewControllers][0];
+        housePhotoViewController.delegate=self;
+        housePhotoViewController.housePictureLocation = [self.houseImages objectAtIndex:selectedIndexPath.row];
+        housePhotoViewController.houseID=houseID;
+        
+    }
 }
+
 - (IBAction)reloadScreen:(UIBarButtonItem *)sender {
     [self.houseImages removeAllObjects];
-    NSUInteger houseID = arc4random_uniform(505001) + 15000000;
-    [self getDataFrom:[NSString stringWithFormat:@"%lu", houseID]];
-
+    houseID = arc4random_uniform(505001) + 15000000;
+    [self getData];
+    ratingButtons.selectedSegmentIndex=0;
 }
+
+
+
+
+
+
+- (IBAction)ratingButtons:(UISegmentedControl *)sender {
+    NSLog(@"%ld",(long)((UISegmentedControl *)sender).selectedSegmentIndex);
+    
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSManagedObject *newRating;
+    newRating = [NSEntityDescription
+                  insertNewObjectForEntityForName:@"Rating"
+                  inManagedObjectContext:context];
+    [newRating setValue: [NSNumber numberWithInteger:houseID] forKey:@"houseID"];
+    [newRating setValue: [NSNumber numberWithInteger:((UISegmentedControl *)sender).selectedSegmentIndex] forKey:@"rating"];
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    } else {
+        NSLog(@"Rating saved");
+    }
+    
+    
+    NSManagedObject *newPartnerRating;
+    newPartnerRating = [NSEntityDescription
+                 insertNewObjectForEntityForName:@"Partners_Ratings"
+                 inManagedObjectContext:context];
+    [newPartnerRating setValue: [NSNumber numberWithInteger:houseID] forKey:@"houseID"];
+    NSNumber *aRating = [NSNumber numberWithInteger:arc4random_uniform(4)];
+    NSLog(@"%@", aRating);
+    [newPartnerRating setValue: aRating forKey:@"rating"];
+    NSError *error2;
+    if (![context save:&error2]) {
+        NSLog(@"Whoops, couldn't save: %@", [error2 localizedDescription]);
+    } else {
+        NSLog(@"Partner Rating saved");
+    }
+    ratingButtons.hidden = YES;
+}
+
+-(void)HousePhotoViewControllerDidFinish:(HousePhotoViewController *)controller{
+    NSLog(@"did dismiss");
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

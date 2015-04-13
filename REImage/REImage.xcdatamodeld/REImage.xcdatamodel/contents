@@ -1,4 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C1510" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Comment" representedClassName="Comment" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="houseID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="houseForComments" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="House" inverseName="commentsForHouse" inverseEntity="House" syncable="YES"/>
+        <relationship name="pictureForComments" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Picture" inverseName="commentsOfPicture" inverseEntity="Picture" syncable="YES"/>
+    </entity>
+    <entity name="House" representedClassName="House" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="houseID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="commentsForHouse" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Comment" inverseName="houseForComments" inverseEntity="Comment" syncable="YES"/>
+        <relationship name="localUserRating" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Rating" inverseName="myRatingForHouse" inverseEntity="Rating" syncable="YES"/>
+        <relationship name="picturesOfHouse" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Picture" inverseName="aPictureOfHouse" inverseEntity="Picture" syncable="YES"/>
+        <relationship name="remoteUserRating" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Partners_Ratings" inverseName="partnersRatingForHouse" inverseEntity="Partners_Ratings" syncable="YES"/>
+    </entity>
+    <entity name="Partners_Ratings" representedClassName="Partners_Ratings" syncable="YES">
+        <attribute name="houseID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="partnersRatingForHouse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="House" inverseName="remoteUserRating" inverseEntity="House" syncable="YES"/>
+    </entity>
+    <entity name="Picture" representedClassName="Picture" syncable="YES">
+        <attribute name="houseID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="aPictureOfHouse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="House" inverseName="picturesOfHouse" inverseEntity="House" syncable="YES"/>
+        <relationship name="commentsOfPicture" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Comment" inverseName="pictureForComments" inverseEntity="Comment" syncable="YES"/>
+    </entity>
+    <entity name="Rating" representedClassName="Rating" syncable="YES">
+        <attribute name="houseID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="myRatingForHouse" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="House" inverseName="localUserRating" inverseEntity="House" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Comment" positionX="-432" positionY="-99" width="128" height="118"/>
+        <element name="House" positionX="-245" positionY="-370" width="128" height="133"/>
+        <element name="Partners_Ratings" positionX="-515" positionY="-261" width="128" height="88"/>
+        <element name="Picture" positionX="0" positionY="-229" width="117" height="28"/>
+        <element name="Rating" positionX="-513" positionY="-405" width="128" height="88"/>
+    </elements>
 </model>
